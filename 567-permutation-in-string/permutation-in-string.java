@@ -1,16 +1,20 @@
+import java.util.Arrays;
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
-        if(s1.length()>s2.length()) return false;
-        char[] c1 = s1.toCharArray();
-        Arrays.sort(c1);
-        String str1 = new String(c1);
-        for(int i=0; i<=s2.length()-s1.length(); i++){
-            String sub = s2.substring(i,i+s1.length());
-            char[] c2 = sub.toCharArray();
-            Arrays.sort(c2);
-            String str2 = new String(c2);
-            if(str2.equals(str1)) return true;
+        int n1 = s1.length();
+        int n2 = s2.length();       
+        if (n1 > n2) return false;
+        int[] count1 = new int[26];
+        int[] count2 = new int[26];
+        for (int i = 0; i < n1; i++) {
+            count1[s1.charAt(i) - 'a']++;
+            count2[s2.charAt(i) - 'a']++;
         }
-        return false;
+        for (int i = 0; i < n2 - n1; i++) {
+            if (Arrays.equals(count1, count2)) return true;
+            count2[s2.charAt(i + n1) - 'a']++;
+            count2[s2.charAt(i) - 'a']--;
+        }
+        return Arrays.equals(count1, count2);
     }
 }
