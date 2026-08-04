@@ -2,7 +2,6 @@ import java.util.Scanner;
 class Solution {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        //System.out.print("n = ");
         int n = sc.nextInt();
         System.out.println(fib(n));
     }
@@ -16,11 +15,7 @@ class Solution {
         if(n==1){
             return b;
         }
-        for(int i=2; i<=n; i++){
-            sum = a+b;
-            a = b;
-            b = sum;
-        }
-        return sum;
+        return fib(n-1)+fib(n-2);
+        
     }
 }
